@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚠️ تم اختراق جهازك ⚠️</title>
+  <style>
+    body {
+      background: black;
+      color: red;
+      font-family: monospace, Tahoma, Arial;
+      text-align: center;
+      padding-top: 100px;
+    }
+    h1 {
+      font-size: 50px;
+      animation: blink 1s infinite;
+    }
+    .sub {
+      color: white;
+      font-size: 22px;
+      margin-top: 20px;
+    }
+    @keyframes blink {
+      0% {opacity: 1;}
+      50% {opacity: 0;}
+      100% {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <h1>⚠️ تم اختراق جهازك ⚠️</h1>
+  <div class="sub" id="status">جارٍ حذف الملفات...</div>
+  <div class="sub" id="timer"></div>
+
+  <script>
+    // عد تنازلي وهمي
+    let count = 45; // ثواني
+    const timerEl = document.getElementById('timer');
+    const statusEl = document.getElementById('status');
+
+    const interval = setInterval(() => {
+      if(count <= 0) {
+        clearInterval(interval);
+        statusEl.innerText = 'النظام تم تعطيله.';
+        timerEl.innerText = '';
+      } else {
+        timerEl.innerText = 'سيتم حذف النظام خلال ' + count + ' ثانية...';
+        count--;
+      }
+    }, 1000);
+
+    // مؤثرات نص وهمي
+    const messages = [
+      'Connecting to kernel...',
+      'Escalating privileges...',
+      'Access granted: admin@system',
+      'Enumerating files...',
+      'Encrypting /Users ...',
+      'Wiping temp cache...',
+      'Deleting restore points...',
+      'Finalizing...'
+    ];
+
+    const logDiv = document.createElement('div');
+    logDiv.style.color = 'lime';
+    logDiv.style.fontSize = '16px';
+    logDiv.style.whiteSpace = 'pre-wrap';
+    logDiv.style.maxWidth = '700px';
+    logDiv.style.margin = '20px auto 0';
+    document.body.appendChild(logDiv);
+
+    let i = 0;
+    function addLine() {
+      if(i < messages.length){
+        logDiv.textContent += '> ' + messages[i++] + '\n';
+        setTimeout(addLine, 700);
+      }
+    }
+    addLine();
+  </script>
+</body>
+</html>
